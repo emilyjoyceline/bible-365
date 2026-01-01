@@ -893,8 +893,21 @@
         const unlockBtn = document.getElementById('unlock-btn');
         const passInput = document.getElementById('lock-password');
         const errorMsg = document.getElementById('lock-error');
+        const toggleBtn = document.getElementById('toggle-password');
 
         if (!lockScreen) return;
+
+        // Toggle Password Visibility
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const type = passInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passInput.setAttribute('type', type);
+
+                // Toggle icons
+                toggleBtn.querySelector('.eye-open').classList.toggle('hidden');
+                toggleBtn.querySelector('.eye-closed').classList.toggle('hidden');
+            });
+        }
 
         // Check if already authenticated
         if (sessionStorage.getItem('auth') === 'true') {

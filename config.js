@@ -15,5 +15,5 @@ const appConfig = {
     appName: "Bible 365",
     cachePrefix: "bible365_ai_exegesis_",
     maxCacheAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-    passwordHash: "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4" // SHA-256 for "1234"
+    passwordHash: "696840207d8dd9dec0694daecc6863e950c083576e0236901176682d53b1d08f" // SHA-256 for "b4caF!rman"
 };
