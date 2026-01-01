@@ -26,6 +26,7 @@
         // Navigation
         navDashboard: document.getElementById('nav-dashboard'),
         navReading: document.getElementById('nav-reading'),
+        navStudy: document.getElementById('nav-study'),
         themeToggle: document.getElementById('theme-toggle'),
 
         // Language Toggle
@@ -35,6 +36,7 @@
         // Views
         dashboardView: document.getElementById('dashboard-view'),
         readingView: document.getElementById('reading-view'),
+        studyView: document.getElementById('study-view'),
 
         // Dashboard
         calendarGrid: document.getElementById('calendar-grid'),
@@ -297,8 +299,10 @@
 
         if (view === 'dashboard') {
             elements.dashboardView.classList.add('active');
-        } else {
+        } else if (view === 'reading') {
             elements.readingView.classList.add('active');
+        } else if (view === 'study') {
+            elements.studyView.classList.add('active');
         }
     }
 
@@ -775,6 +779,7 @@
                 openReadingView(getDayOfYear());
             }
         });
+        elements.navStudy.addEventListener('click', () => switchView('study'));
 
         // Theme
         elements.themeToggle.addEventListener('click', toggleTheme);
@@ -947,11 +952,75 @@
         });
     }
 
+    function setupStudyView() {
+        const input = document.getElementById('manual-reference-input');
+        const generateBtn = document.getElementById('manual-generate-btn');
+        const resultContainer = document.getElementById('manual-exegesis-result');
+
+        if (!input || !generateBtn) return;
+
+        // Generate Logic
+        const handleGenerate = async (forceRefresh = false) => {
+            const ref = input.value.trim();
+            const isId = state.language === 'id';
+
+            if (!ref) {
+                showToast(isId ? 'Masukkan referensi Alkitab' : 'Enter Bible reference', 'error');
+                return;
+            }
+
+            // Loading
+            resultContainer.innerHTML = `
+                <div class="ai-loading">
+                    <div class="ai-loading-spinner"></div>
+                    <p>${isId ? 'Menganalisis teks...' : 'Analyzing text...'}</p>
+                </div>
+            `;
+
+            try {
+                const result = await window.AIExegesis.generateExegesis(ref, state.language, forceRefresh);
+
+                if (result.success) {
+                    resultContainer.innerHTML = window.AIExegesis.formatExegesisHTML(result, state.language);
+
+                    // Attach Listeners
+                    // 1. Cross Refs
+                    const autoFetchContainers = resultContainer.querySelectorAll('.cross-ref-verse.auto-fetch');
+                    autoFetchContainers.forEach(el => {
+                        window.AIExegesis.fetchCrossRefVerse(el.dataset.reference, el, state.language);
+                    });
+
+                    // 2. Regenerate
+                    const regenBtn = resultContainer.querySelector('.regenerate-ai-btn');
+                    if (regenBtn) {
+                        regenBtn.addEventListener('click', () => handleGenerate(true));
+                    }
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                resultContainer.innerHTML = `
+                    <div class="ai-error">
+                        <p>⚠️ ${error.message || (isId ? 'Gagal memuat' : 'Failed to load')}</p>
+                        <button class="retry-ai-btn">${isId ? 'Coba Lagi' : 'Try Again'}</button>
+                    </div>
+                `;
+                resultContainer.querySelector('.retry-ai-btn')?.addEventListener('click', () => handleGenerate(true));
+            }
+        };
+
+        generateBtn.addEventListener('click', () => handleGenerate(false));
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleGenerate(false);
+        });
+    }
+
     // ============================================
     // Initialization
     // ============================================
     function init() {
         checkAuth(); // Protection first
+        setupStudyView(); // Setup Study View Logic
         loadProgress();
         applyTheme();
         applyLanguage();

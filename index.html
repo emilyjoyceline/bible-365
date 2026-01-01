@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 
 <body>
@@ -60,6 +60,10 @@
                 <button class="nav-btn" data-view="reading" id="nav-reading">
                     <span class="nav-icon">📖</span>
                     <span class="nav-text">Reading</span>
+                </button>
+                <button class="nav-btn" data-view="study" id="nav-study">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-text">Study</span>
                 </button>
             </nav>
             <div class="header-actions">
@@ -190,6 +194,43 @@
                 </div>
             </div>
         </section>
+
+        <!-- Study View -->
+        <section class="view study-view" id="study-view">
+            <div class="study-view-container">
+                <div class="study-header">
+                    <h2>AI Bible Study</h2>
+                    <p>Temukan makna mendalam dari setiap ayat Alkitab dengan analisis bahasa asli.</p>
+                </div>
+
+                <div class="manual-input-container">
+                    <p class="input-instruction">Masukkan referensi Alkitab (Contoh: Yohanes 3:16)</p>
+                    <div class="input-group">
+                        <input type="text" id="manual-reference-input" placeholder="Kitab Pasal:Ayat">
+                        <button id="manual-generate-btn" class="primary-btn">Generate</button>
+                    </div>
+                </div>
+
+                <div id="manual-exegesis-result" class="exegesis-content">
+                    <div class="study-placeholder">
+                        <div class="placeholder-decoration">
+                            <span class="deco-line"></span>
+                            <span class="deco-star">✦</span>
+                            <span class="deco-line"></span>
+                        </div>
+                        <div class="placeholder-icon">📖</div>
+                        <h3>Mulai Studi Alkitab</h3>
+                        <p>Masukkan referensi ayat di atas untuk mendapatkan eksegesis mendalam dengan analisis bahasa
+                            asli (Ibrani/Yunani).</p>
+                        <div class="placeholder-tips">
+                            <span class="tip">💡 Contoh: Yohanes 3:16</span>
+                            <span class="tip">📜 Mazmur 23:1-6</span>
+                            <span class="tip">✝️ Roma 8:28</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Back to Top Button -->
@@ -229,6 +270,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Manual Exegesis Modal REMOVED -->
 
     <!-- Scripts -->
     <script src="config.js"></script>
