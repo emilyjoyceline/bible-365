@@ -888,10 +888,57 @@
         }
     }
 
+    function checkAuth() {
+        const lockScreen = document.getElementById('lock-screen');
+        const unlockBtn = document.getElementById('unlock-btn');
+        const passInput = document.getElementById('lock-password');
+        const errorMsg = document.getElementById('lock-error');
+
+        if (!lockScreen) return;
+
+        // Check if already authenticated
+        if (sessionStorage.getItem('auth') === 'true') {
+            lockScreen.classList.add('hidden');
+            return;
+        }
+
+        async function tryUnlock() {
+            const val = passInput.value;
+            // Use hashed password
+            const hash = await sha256(val);
+
+            if (hash === appConfig.passwordHash) {
+                sessionStorage.setItem('auth', 'true');
+                lockScreen.classList.add('hidden');
+                errorMsg.classList.add('hidden');
+                // Optional: play sound or animate
+                lockScreen.style.opacity = '0';
+                setTimeout(() => lockScreen.style.display = 'none', 500);
+            } else {
+                errorMsg.classList.remove('hidden');
+                passInput.value = '';
+                passInput.focus();
+            }
+        }
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        unlockBtn.addEventListener('click', tryUnlock);
+        passInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') tryUnlock();
+        });
+    }
+
     // ============================================
     // Initialization
     // ============================================
     function init() {
+        checkAuth(); // Protection first
         loadProgress();
         applyTheme();
         applyLanguage();
