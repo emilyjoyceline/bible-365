@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="One Year Bible Reading Plan with Exegesis - Rencana Baca Alkitab Setahun dengan Tafsiran Mendalam">
+    <title>Bible 365 - One Year Bible Reading Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=3">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">✝</span>
+                <h1>Bible 365</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-view="dashboard" id="nav-dashboard">
+                    <span class="nav-icon">📅</span>
+                    <span class="nav-text">Dashboard</span>
+                </button>
+                <button class="nav-btn" data-view="reading" id="nav-reading">
+                    <span class="nav-icon">📖</span>
+                    <span class="nav-text">Reading</span>
+                </button>
+            </nav>
+            <div class="header-actions">
+                <div class="language-toggle" id="language-toggle" aria-label="Toggle language">
+                    <button class="lang-btn active" data-lang="id" id="lang-id">ID</button>
+                    <button class="lang-btn" data-lang="en" id="lang-en">EN</button>
+                </div>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main" id="main">
+        <!-- Dashboard View -->
+        <section class="view dashboard-view active" id="dashboard-view">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="hero-content">
+                    <h2 class="hero-title">Selamat Datang di Perjalanan Alkitab</h2>
+                    <p class="hero-subtitle">Baca Alkitab dalam setahun dengan panduan eksegesis harian</p>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card glass">
+                        <div class="stat-value" id="days-completed">0</div>
+                        <div class="stat-label">Hari Selesai</div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-value" id="current-streak">0</div>
+                        <div class="stat-label">Streak Saat Ini</div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-value" id="chapters-read">0</div>
+                        <div class="stat-label">Pasal Dibaca</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="progress-section">
+                <div class="progress-header">
+                    <h3>Progress Bacaan</h3>
+                    <span class="progress-percentage" id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="progress-info">
+                    <span id="progress-info-text">0 dari 365 hari</span>
+                </div>
+            </div>
+
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <div class="calendar-header">
+                    <h3>Kalender 365 Hari</h3>
+                    <div class="calendar-filters">
+                        <button class="filter-btn active" data-filter="all" id="filter-all">Semua</button>
+                        <button class="filter-btn" data-filter="completed" id="filter-completed">Selesai</button>
+                        <button class="filter-btn" data-filter="pending" id="filter-pending">Belum</button>
+                    </div>
+                </div>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot completed"></span>
+                        <span>Selesai</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot pending"></span>
+                        <span>Belum Dibaca</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot today"></span>
+                        <span>Hari Ini</span>
+                    </div>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Days will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reading View -->
+        <section class="view reading-view" id="reading-view">
+            <div class="reading-header">
+                <button class="back-btn" id="back-to-dashboard">
+                    <span>←</span>
+                    <span>Kembali</span>
+                </button>
+                <div class="reading-day-info">
+                    <h2 id="reading-day-title">Hari 1</h2>
+                    <span class="reading-date" id="reading-date"></span>
+                </div>
+                <div class="header-actions-right">
+                    <button class="quiz-btn" id="open-quiz-btn">
+                        <span class="quiz-icon">🧠</span>
+                        <span class="btn-text">Quiz</span>
+                    </button>
+                    <button class="mark-complete-btn" id="mark-complete-btn">
+                        <span class="check-icon">✓</span>
+                        <span class="btn-text">Tandai Selesai</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Daily Progress -->
+            <div class="daily-progress-container">
+                <div class="progress-info">
+                    <span class="progress-label">Progress Harian</span>
+                    <div class="progress-stats">
+                        <strong id="daily-progress-percent">0%</strong>
+                        <span id="daily-progress-text">0 dari 4 selesai</span>
+                    </div>
+                </div>
+                <div class="progress-bar daily-bar">
+                    <div class="progress-fill" id="daily-progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="reading-content">
+                <div class="readings-list" id="readings-list">
+                    <!-- Readings will be generated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to Top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
+    </button>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Modal for Exegesis -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal" id="exegesis-modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Eksegesis</h3>
+                <button class="modal-close" id="modal-close">×</button>
+            </div>
+            <div class="modal-content" id="modal-content">
+                <!-- Exegesis content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div class="modal-overlay" id="quiz-modal">
+        <div class="modal quiz-container-modal">
+            <div class="modal-header">
+                <h3 id="quiz-title">Challenge Quiz</h3>
+                <button class="modal-close"
+                    onclick="document.getElementById('quiz-modal').classList.remove('active')">×</button>
+            </div>
+            <div class="modal-content" id="quiz-content-area">
+                <!-- Dynamic Quiz Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="data.js"></script>
+    <script src="api.js"></script>
+    <script src="ai-exegesis.js"></script>
+    <script src="ai-quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
