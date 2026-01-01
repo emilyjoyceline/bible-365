@@ -1506,12 +1506,119 @@ p {
     background: var(--color-border);
 }
 
-/* AI Exegesis Result */
+/* AI Exegesis Result - Mobile First */
 .ai-exegesis-result {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), rgba(124, 58, 237, 0.03));
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     border: 1px solid rgba(99, 102, 241, 0.15);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Exegesis Section Styling */
+.exegesis-section {
+    margin-bottom: var(--spacing-lg);
+}
+
+.exegesis-section h6 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.exegesis-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.exegesis-section ul {
+    padding-left: var(--spacing-lg);
+}
+
+.exegesis-section li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* Passage Result Section - Bible Verse Display */
+.passage-result-section {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.passage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.passage-header h4 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.passage-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-text);
+}
+
+.passage-text .verse-number {
+    font-weight: 700;
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    vertical-align: super;
+    margin-right: 2px;
+}
+
+.no-passage-text {
+    color: var(--color-text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: var(--spacing-lg);
+}
+
+/* Exegesis Result Section */
+.exegesis-result-section {
+    margin-top: var(--spacing-lg);
+}
+
+/* Mobile Responsiveness for Passage */
+@media (max-width: 768px) {
+    .passage-result-section {
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+
+    .passage-header h4 {
+        font-size: 1.1rem;
+    }
+
+    .passage-text {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
 }
 
 .ai-header {
@@ -1571,43 +1678,48 @@ p {
 
 .original-words-grid {
     display: grid;
+    grid-template-columns: 1fr;
     gap: var(--spacing-md);
     margin-top: var(--spacing-md);
+    width: 100%;
 }
 
 .original-word-card {
     background: var(--color-bg-secondary);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
     border: 1px solid var(--color-border-light);
     transition: all var(--transition-fast);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .original-word-card:hover {
     border-color: var(--color-secondary);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
 }
 
 .word-header {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-sm);
+    align-items: flex-start;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
 }
 
 .original-script {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 600;
     color: var(--color-secondary);
     font-family: 'Times New Roman', serif;
     direction: rtl;
+    line-height: 1.3;
 }
 
 .transliteration {
     color: var(--color-text-secondary);
     font-style: italic;
-    font-size: 0.95rem;
+    font-size: 1rem;
 }
 
 .strong-number {
@@ -2218,19 +2330,161 @@ p {
 }
 
 .manual-input-container {
-    padding: var(--spacing-md);
+    padding: var(--spacing-lg);
     background: var(--color-bg-secondary);
-    border-radius: var(--radius-md);
-    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--spacing-lg);
     border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
 }
 
 .input-instruction {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--color-text-secondary);
-    margin-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
 }
 
+/* Dropdown Selectors */
+.dropdown-selectors {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.dropdown-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.dropdown-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.styled-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 0.9rem 2.5rem 0.9rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.8rem center;
+    background-size: 16px;
+    width: 100%;
+}
+
+.styled-select:hover:not(:disabled) {
+    border-color: var(--color-primary-light);
+}
+
+.styled-select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.styled-select:disabled {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+[data-theme="dark"] .styled-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Selected Reference Preview */
+.selected-reference-preview {
+    text-align: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.selected-reference-preview:not(:empty) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-primary-light);
+}
+
+.selected-reference-preview .reference-text {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.selected-reference-preview .reference-icon {
+    margin-right: var(--spacing-sm);
+    font-size: 1.2rem;
+}
+
+/* Generate Button */
+.generate-study-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, var(--color-primary), #7c3aed);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--shadow-md);
+}
+
+.generate-study-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.generate-study-btn:disabled {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.generate-study-btn .btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+    .dropdown-selectors {
+        grid-template-columns: 1fr;
+    }
+
+    .manual-input-container {
+        padding: var(--spacing-md);
+    }
+}
+
+/* Input group kept for backward compatibility */
 .input-group {
     display: flex;
     gap: var(--spacing-sm);
@@ -2261,16 +2515,39 @@ p {
     }
 }
 
-/* Study View Specifics */
+/* Exegesis Content Container */
+.exegesis-content {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    margin-top: var(--spacing-md);
+}
+
+.exegesis-content:empty {
+    display: none;
+}
+
+/* Study View Specifics - Mobile First */
 .study-view {
     padding-bottom: 80px;
     /* Space for nav */
+    width: 100%;
 }
 
 .study-view-container {
-    max-width: 800px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: var(--spacing-md);
+    padding: var(--spacing-sm);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Desktop: limit width */
+@media (min-width: 769px) {
+    .study-view-container {
+        max-width: 900px;
+        padding: var(--spacing-lg);
+    }
 }
 
 .study-header {

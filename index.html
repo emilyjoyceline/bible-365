@@ -204,11 +204,32 @@
                 </div>
 
                 <div class="manual-input-container">
-                    <p class="input-instruction">Masukkan referensi Alkitab (Contoh: Yohanes 3:16)</p>
-                    <div class="input-group">
-                        <input type="text" id="manual-reference-input" placeholder="Kitab Pasal:Ayat">
-                        <button id="manual-generate-btn" class="primary-btn">Generate</button>
+                    <p class="input-instruction">Pilih Kitab, Pasal, dan Ayat untuk studi mendalam</p>
+                    <div class="dropdown-selectors">
+                        <div class="dropdown-group">
+                            <label for="book-select">📖 Kitab</label>
+                            <select id="book-select" class="styled-select">
+                                <option value="">-- Pilih Kitab --</option>
+                            </select>
+                        </div>
+                        <div class="dropdown-group">
+                            <label for="chapter-select">📑 Pasal</label>
+                            <select id="chapter-select" class="styled-select" disabled>
+                                <option value="">-- Pilih Pasal --</option>
+                            </select>
+                        </div>
+                        <div class="dropdown-group">
+                            <label for="verse-select">✨ Ayat</label>
+                            <select id="verse-select" class="styled-select" disabled>
+                                <option value="">-- Semua Ayat --</option>
+                            </select>
+                        </div>
                     </div>
+                    <div class="selected-reference-preview" id="selected-reference-preview"></div>
+                    <button id="manual-generate-btn" class="primary-btn generate-study-btn" disabled>
+                        <span class="btn-icon">🔍</span>
+                        <span>Generate Eksegesis</span>
+                    </button>
                 </div>
 
                 <div id="manual-exegesis-result" class="exegesis-content">
