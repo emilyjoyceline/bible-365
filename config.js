@@ -12,8 +12,7 @@ const geminiConfig = {
 // App Settings
 const appConfig = {
     appName: "Bible 365",
-    appName: "Bible 365",
     cachePrefix: "bible365_ai_exegesis_",
     maxCacheAge: 7 * 24 * 60 * 60 * 1000, // 7 days in milliseconds
-    passwordHash: "696840207d8dd9dec0694daecc6863e950c083576e0236901176682d53b1d08f" // SHA-256 for "b4caF!rman"
+    passwordHash: "696840207d8dd9dec0694daecc6863e950c083576e0236901176682d53b1d08f"
 };
