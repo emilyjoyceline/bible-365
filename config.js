@@ -4,7 +4,7 @@
  */
 
 const geminiConfig = {
-    apiKey: "AIzaSyCd1NUS1TQXAezBg05edi_PrMOF1Xe2cQc",
+    apiKey: "AIzaSyAnC40-ZB3Fg1ucR-cUJcCy9vSECP_M5Oo",
     model: "gemini-3-flash-preview",
     apiUrl: "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent"
 };
