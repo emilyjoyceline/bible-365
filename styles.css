@@ -669,6 +669,88 @@ p {
     font-size: 0.9rem;
 }
 
+/* Header Actions */
+.header-actions-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+/* Bottom Day Navigation */
+.bottom-day-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--color-border);
+    z-index: var(--z-sticky);
+    gap: var(--spacing-md);
+}
+
+.bottom-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    flex: 1;
+    justify-content: center;
+    max-width: 200px;
+}
+
+.bottom-nav-btn.prev {
+    margin-right: auto;
+}
+
+.bottom-nav-btn.next {
+    margin-left: auto;
+}
+
+.bottom-nav-btn:hover:not(:disabled) {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.bottom-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.bottom-nav-btn .nav-arrow {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.bottom-nav-btn .nav-label {
+    white-space: nowrap;
+}
+
+/* Add padding to reading content to avoid overlap with fixed bottom nav */
+.reading-view .reading-content {
+    padding-bottom: 80px;
+}
+
+/* Hide bottom nav when not in reading view */
+.reading-view:not(.active) .bottom-day-nav {
+    display: none;
+}
+
 .mark-complete-btn {
     display: flex;
     align-items: center;
@@ -803,13 +885,34 @@ p {
     font-weight: 400;
 }
 
+/* Reading Status Badge in Header */
+.reading-status {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.reading-status.completed {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+/* Reading Card Footer */
+.reading-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-top: 1px solid var(--color-border-light);
+    background: var(--color-bg-tertiary);
+}
+
 .toggle-read-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     border: 2px solid var(--color-border);
-    background: transparent;
-    color: transparent;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -818,22 +921,32 @@ p {
 }
 
 .toggle-read-btn .check-icon {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 800;
+}
+
+.toggle-read-btn .btn-label {
+    display: none;
 }
 
 .toggle-read-btn:hover {
     border-color: var(--color-success);
     color: var(--color-success);
     background: rgba(16, 185, 129, 0.1);
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
 }
 
 .toggle-read-btn.checked {
-    background: var(--color-success);
+    background: linear-gradient(135deg, var(--color-success), #059669);
     border-color: var(--color-success);
     color: white;
-    transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.toggle-read-btn.checked:hover {
+    background: linear-gradient(135deg, #059669, var(--color-success));
+    transform: scale(1.1);
 }
 
 .reading-card-content {

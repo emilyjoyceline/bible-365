@@ -106,7 +106,7 @@ Response MUST be in valid JSON format:
 
     // Call Gemini API
     async callGemini(passage, language) {
-        const url = `${geminiConfig.apiUrl}?key=${geminiConfig.apiKey}`;
+        const url = geminiConfig.workerUrl;
         const systemPrompt = this.getSystemPrompt(language);
 
         const userMessage = language === 'id'

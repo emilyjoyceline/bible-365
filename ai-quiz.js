@@ -51,7 +51,7 @@ Question: Next question?
     },
 
     async generateQuizData(readings, language) {
-        const url = `${geminiConfig.apiUrl}?key=${geminiConfig.apiKey}`;
+        const url = geminiConfig.workerUrl;
         const systemPrompt = this.getSystemPrompt(language);
 
         const userMessage = `Reading passages: ${readings.join(', ')}. Generate 5 questions.`;

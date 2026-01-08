@@ -59,6 +59,13 @@
         markCompleteBtn: document.getElementById('mark-complete-btn'),
         readingsList: document.getElementById('readings-list'),
 
+        // Bottom Day Navigation
+        bottomDayNav: document.getElementById('bottom-day-nav'),
+        prevDayBtn: document.getElementById('prev-day-btn'),
+        nextDayBtn: document.getElementById('next-day-btn'),
+        prevDayLabel: document.getElementById('prev-day-label'),
+        nextDayLabel: document.getElementById('next-day-label'),
+
         // Modal
         modalOverlay: document.getElementById('modal-overlay'),
         modalTitle: document.getElementById('modal-title'),
@@ -297,6 +304,11 @@
             v.classList.remove('active');
         });
 
+        // Show/hide bottom day navigation
+        if (elements.bottomDayNav) {
+            elements.bottomDayNav.style.display = view === 'reading' ? 'flex' : 'none';
+        }
+
         if (view === 'dashboard') {
             elements.dashboardView.classList.add('active');
         } else if (view === 'reading') {
@@ -320,6 +332,9 @@
         elements.readingDayTitle.textContent = `Hari ${day}`;
         elements.readingDate.textContent = formatDate(day);
 
+        // Update navigation buttons state
+        updateNavButtons(day);
+
         // Update complete button
         updateCompleteButton(day);
         updateDailyProgress(day);
@@ -331,6 +346,38 @@
             const card = createReadingCard(reading, index);
             elements.readingsList.appendChild(card);
         });
+    }
+
+    function updateNavButtons(day) {
+        // Update prev button
+        if (elements.prevDayBtn) {
+            elements.prevDayBtn.disabled = day <= 1;
+        }
+        if (elements.prevDayLabel) {
+            elements.prevDayLabel.textContent = day > 1 ? `Hari ${day - 1}` : 'Hari Sebelumnya';
+        }
+
+        // Update next button
+        if (elements.nextDayBtn) {
+            elements.nextDayBtn.disabled = day >= 365;
+        }
+        if (elements.nextDayLabel) {
+            elements.nextDayLabel.textContent = day < 365 ? `Hari ${day + 1}` : 'Hari Berikutnya';
+        }
+    }
+
+    function goToPrevDay() {
+        if (state.selectedDay > 1) {
+            openReadingView(state.selectedDay - 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function goToNextDay() {
+        if (state.selectedDay < 365) {
+            openReadingView(state.selectedDay + 1);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     function formatDate(dayOfYear) {
@@ -358,9 +405,9 @@
                         <span>${getBookDescription(bookName)}</span>
                     </div>
                 </div>
-                <button class="toggle-read-btn ${isRead ? 'checked' : ''}" data-index="${index}" aria-label="Tandai dibaca">
-                    <span class="check-icon">✓</span>
-                </button>
+                <div class="reading-status ${isRead ? 'completed' : ''}">
+                    ${isRead ? '✓ Sudah dibaca' : ''}
+                </div>
             </div>
             <div class="reading-card-content">
                 <div class="reading-passage" id="passage-${index}">
@@ -385,6 +432,12 @@
                             <p>${state.language === 'id' ? 'Klik untuk membuka dan generate eksegesis AI...' : 'Click to open and generate AI exegesis...'}</p>
                         </div>
                     </div>
+                </div>
+                <div class="reading-card-footer">
+                    <button class="toggle-read-btn ${isRead ? 'checked' : ''}" data-index="${index}" aria-label="Tandai dibaca">
+                        <span class="check-icon">✓</span>
+                        <span class="btn-label">${isRead ? 'Sudah Dibaca' : 'Tandai Sudah Dibaca'}</span>
+                    </button>
                 </div>
             </div>
         `;
@@ -790,6 +843,14 @@
 
         // Back button
         elements.backToDashboard.addEventListener('click', () => switchView('dashboard'));
+
+        // Day navigation buttons
+        if (elements.prevDayBtn) {
+            elements.prevDayBtn.addEventListener('click', goToPrevDay);
+        }
+        if (elements.nextDayBtn) {
+            elements.nextDayBtn.addEventListener('click', goToNextDay);
+        }
 
         // Complete button
         elements.markCompleteBtn.addEventListener('click', toggleDayComplete);
