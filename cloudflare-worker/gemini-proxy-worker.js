@@ -1,15 +1,3 @@
-/**
- * Cloudflare Worker - Gemini API Proxy
- * 
- * SETUP INSTRUCTIONS:
- * 1. Go to https://workers.cloudflare.com/
- * 2. Create a new Worker
- * 3. Paste this entire code
- * 4. Go to Settings > Variables > Add Environment Variable:
- *    - Name: GEMINI_API_KEY
- *    - Value: Your Gemini API key (e.g., AIzaSy...)
- * 5. Deploy and copy your Worker URL
- */
 
 export default {
     async fetch(request, env, ctx) {
